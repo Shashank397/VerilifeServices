@@ -16,7 +16,7 @@ import com.example.demo.model.DonorData;
 import com.example.demo.service.SearchBloodService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins="http://localhost:3000/")
 public class SearchBloodController {
 
 	@Autowired

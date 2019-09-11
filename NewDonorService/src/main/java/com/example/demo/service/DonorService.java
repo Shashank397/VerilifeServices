@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Credentials;
 import com.example.demo.model.DonorData;
+import com.example.demo.repository.CredentialsRepo;
 import com.example.demo.repository.DonorRepository;
 
 @Service
@@ -16,6 +18,9 @@ public class DonorService {
 
 	@Autowired
 	private CrudRepository<DonorData, Integer> repo;
+	
+	@Autowired
+	private CredentialsRepo crepo;
 	
 	public DonorData addDonorToDb(DonorData entity) {
 		entity.setEffective_date(LocalDate.now());
@@ -41,5 +46,9 @@ public class DonorService {
 		return result;
 	}
 	
+	public void saveCred(Credentials entity)
+	{
+		crepo.save(entity);
+	}
 	
 }

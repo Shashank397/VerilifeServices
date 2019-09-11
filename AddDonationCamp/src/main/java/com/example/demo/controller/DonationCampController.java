@@ -21,6 +21,7 @@ public class DonationCampController {
 	RepositoryTemplate<DonationCamp> repo;
 	
 	@GetMapping("/getAll")
+	@CrossOrigin(origins = "http://localhost:3000")
 	public List<DonationCamp> getAll(){
 		System.out.println("0000000000000000000000000000000000method is called00000000000000000000000000");
 		return this.repo.getAll();

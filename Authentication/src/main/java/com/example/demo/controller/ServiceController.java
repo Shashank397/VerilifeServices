@@ -83,36 +83,10 @@ public class ServiceController {
 	
 	
 	
-	
-
-	// Donor Services
-	@PostMapping(value = "/addDonor")
-	public DonorData addDonor(@RequestBody SignupDonor Sdonor) {
-		System.out.println("(((((((((((((((((((methid called ====="+Sdonor.getBloodGroup());
-		DonorData donor = new DonorData();
-		donor.setbloodGroup(Sdonor.getBloodGroup());
-		donor.setCity(Sdonor.getCity());
-		donor.setCountry(Sdonor.getCountry());
-		donor.setDob(Sdonor.getDob());
-		donor.setDonor_availability(Sdonor.getDonor_availability());
-		donor.setDonor_name(Sdonor.getDonor_name());
-		donor.setEffective_date(Sdonor.getEffective_date());
-		donor.setEmail(Sdonor.getEmail());
-		donor.setLine(Sdonor.getLine());
-		donor.setPhone_number(Sdonor.getPhone_number());
-		donor.setPincode(Sdonor.getPincode());
-		donor.setState(Sdonor.getState());
-		Credentials cred = new Credentials();
-		cred.setUsername(Sdonor.getEmail());
-		cred.setPassword(encoder.encode(Sdonor.getPassword()));
-		service.saveCred(cred);
-		return template.postForObject("http://new-donor/addDonor",donor, DonorData.class);
+	@GetMapping(value = "/get/{id}")
+	public DonorData getDonorById(@PathVariable("id") int id) {
+		return template.getForObject("http://new-donor/get/"+id, DonorData.class);
 	}
-	
-//	@GetMapping(value = "/get/{id}")
-//	public Patient getDonorById(@PathVariable("id") int id) {
-//		return template.getForObject("http://new-donor/get/"+id, Patient.class);
-//	}
 	
 	//Patient services
 	@PostMapping(value = "/addPatient", produces = "application/json", consumes = "application/json")
@@ -160,6 +134,11 @@ public class ServiceController {
 		return template.postForObject("http://register-donation-camp/addDonationCamp", camp, DonationCamp.class);
 	}
 	
+	@PostMapping("/updateDonor")
+	public DonorData updateDonor(@RequestBody DonorData donor)
+	{
+		return template.postForObject("http://new-donor/addDonor",donor, DonorData.class);
+	}
 	
 	
 }
